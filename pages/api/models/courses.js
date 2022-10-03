@@ -29,7 +29,7 @@ const lecturesSchema = new Schema({
 
 const markAsComplete = new Schema({
 
-	user: {type: Schema.Types.ObjectId,},
+	user: {type: String,},
 	lecture: {type: Schema.Types.ObjectId}
 
 })
@@ -54,4 +54,6 @@ const courseSchema = new Schema({
 
 const Course = mongoose.models.Course || mongoose.model('Course', courseSchema);
 
-module.exports = Course;
+const Status = mongoose.models.markAsComplete || mongoose.model('markAsComplete', markAsComplete);
+
+module.exports = {Course, Status};

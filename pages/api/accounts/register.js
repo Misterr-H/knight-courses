@@ -1,3 +1,4 @@
+
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import connection from './../models/connection'
@@ -17,13 +18,17 @@ export default async function handler(req, res) {
   newUser.save((err) => {
 
     if (err){
-      res.status(404).json({message: "User didn't created."})
+
+      res.status(404).json({message: "User didn't created."});
+
     }
 
     else{
 
-      res.status(201).json({message: "User created!"})
+      res.status(201).json({message: "User created!"});
+
     }
+
   })
 
 }
