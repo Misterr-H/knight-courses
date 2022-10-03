@@ -40,10 +40,10 @@ const courseSchema = new Schema({
 	author: String,
 	description: String,
 	price: Number,
-	category: String,
-	releaseDate: Date,
+	// category: String,
+	// releaseDate: Date,
 	language: String,
-	duration: Number,
+	duration: String,
 	certificate: Boolean,
 
 	lectures: [lecturesSchema],

@@ -13,14 +13,15 @@ export default async function handler(req, res) {
 
   console.log("Connecting to mongo");
 
-  const newCourse = Course({req.body})
+  console.log(req.body);
+  const newCourse = Course(req.body)
 
   newCourse.save((err) => {
 
     if (err){
 
       res.status(404).json({message: "Course didn't added."})
-      
+
     }
 
     else{

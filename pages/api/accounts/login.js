@@ -3,6 +3,10 @@
 
 import connection from './../models/connection'
 
+const dotenv = require('dotenv');
+
+const jwt = require('jsonwebtoken');
+
 
 import User from "./../models/UserDetails.js"
 
@@ -14,6 +18,13 @@ export default async function handler(req, res) {
   const username = req.body.username;
   const password = req.body.password;
 
+  console.log("Connecting to mongo");
+
+  await connection();
+
+  console.log("Connecting to mongo");
+
+
   let user;
 
 
@@ -23,20 +34,23 @@ export default async function handler(req, res) {
 
     if (user && user.password === password){
 
-      res.status(200).json({message: "login Successfully."})
+      const token = jwt.sign(user.username, process.env.JWT_SECRET_KEY);
+
+      res.status(200).json(token);
+
     }
 
     else{
 
-      res.status(404).json({message: "Password didn't match."})
+      res.status(401).json({message: "Password didn't match."})
+
     }
 
   }
 
   catch(err){
 
-    res.status(404).json(err)
-    return;
+    res.send(err)
 
   }
 
