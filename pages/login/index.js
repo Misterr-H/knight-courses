@@ -2,7 +2,8 @@ import Head from "next/head";
 import {motion} from "framer-motion";
 import {ButtonLoading} from "../../components/LoadingComponents";
 import Link from "next/link";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {IsLoggedIn, Login as AuthLogin} from "../../util/Auth";
 
 const Login = () => {
     const [isLogged, setIsLogged] = useState(false);
@@ -11,8 +12,33 @@ const Login = () => {
     const [isLoaded, setIsLoaded] = useState(true);
     const [error, setError] = useState('');
 
-    const handleSubmit = () => {
+    useEffect(() => {
+        setIsLogged(IsLoggedIn());
+        if(IsLoggedIn()) {
+            window.location.href = '/';
+        }
+    })
 
+    const handleSubmit = () => {
+        setIsLoaded(false);
+        fetch('/api/accounts/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        }).then(res => res.json()).then(data => {
+            if(data.message) {
+                setError("Invalid username or password");
+                setIsLoaded(true);
+            } else {
+                setIsLogged(true);
+                AuthLogin(username, data.token);
+            }
+        })
     }
 
     return (

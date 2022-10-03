@@ -1,12 +1,22 @@
 import Link from "next/link";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {GetUsername, IsLoggedIn, Logout} from "../util/Auth";
+import {useRouter} from "next/router";
 
 const Navbar = ()   => {
+    const router = useRouter();
+
     const [isLogged, setIsLogged] = useState(false);
     const [isLoaded, setIsLoaded] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        setIsLogged(IsLoggedIn());
+        setUsername(GetUsername());
+    }, [])
 
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -19,14 +29,16 @@ const Navbar = ()   => {
     return (
         <div className={'flex justify-between items-center py-5 md:px-10 px-2 bg-black text-white'}>
             <div className={'flex items-center'}>
-                <span className={'font-bold text-2xl'}>Knight Courses</span>
+                <span onClick={() => {
+                    router.push('/');
+                }} className={'cursor-pointer hover:scale-105 duration-200 font-bold text-2xl'}>Knight Courses</span>
             </div>
             <div className={'flex items-center justify-between'}>
 
                 {isLogged ? (
                         <>
                             <div className={'flex items-center cursor-pointer'} onClick={handleClick}>
-                                Username
+                                {username}
                             </div>
                             <Menu
                                 id="basic-menu"
@@ -37,9 +49,12 @@ const Navbar = ()   => {
                                     'aria-labelledby': 'basic-button',
                                 }}
                             >
-                                {/*<MenuItem onClick={handleClose}>Profile</MenuItem>*/}
                                 <MenuItem onClick={() => {
-
+                                    router.push('/profile');
+                                }}>My Dashboard</MenuItem>
+                                <MenuItem onClick={() => {
+                                    Logout();
+                                    router.push('/');
                                 }}>Logout</MenuItem>
                             </Menu>
                         </>

@@ -14,7 +14,32 @@ const Signup = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = () => {
-
+        setIsLoading(true);
+        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!emailRegex.test(email)) {
+            setError("Invalid email");
+            setIsLoading(false);
+            return;
+        }
+        fetch("/api/accounts/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            })
+        }).then(res => res.json()).then(data => {
+            if(data.status === 0) {
+                setError("An error occurred while creating your account. Please try again later.");
+                setIsLoading(false);
+            } else {
+                setSuccess(true);
+                setIsLoading(false);
+            }
+        })
     }
 
     return (
