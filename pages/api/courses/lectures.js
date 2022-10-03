@@ -14,20 +14,11 @@ export default async function handler(req, res) {
   console.log("Connecting to mongo");
 
   console.log(req.body);
-  const newCourse = Course(req.body)
 
-  newCourse.save((err) => {
+  const course = await Course.findOne(req.body);
 
-    if (err){
+  console.log(course.lectures);
 
-      res.status(404).json({message: "Course didn't added."})
-
-    }
-
-    else{
-
-      res.status(201).json({message: "Course added!"})
-    }
-  })
+  res.status(200).json(course.lectures);
 
 }
