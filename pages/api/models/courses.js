@@ -12,7 +12,7 @@ const enrolledUserSchema = new Schema({
 
   user: {
 
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "User",
 
   },
@@ -47,7 +47,7 @@ const courseSchema = new Schema({
 	certificate: Boolean,
 
 	lectures: [lecturesSchema],
-	enrolls: [enrolledUserSchema],
+	enrolls: [{type: String}],
 
 }, { timestamps: true });
 
@@ -56,4 +56,4 @@ const Course = mongoose.models.Course || mongoose.model('Course', courseSchema);
 
 const Status = mongoose.models.markAsComplete || mongoose.model('markAsComplete', markAsComplete);
 
-module.exports = {Course, Status};
+module.exports = {Course: Course, Status: Status};
