@@ -16,7 +16,8 @@ import {GetUsername} from "../../util/Auth";
 
 export default function CoursePage({course}) {
     const router = useRouter();
-    const { slug } = router.query;
+    const { idd } = router.query;
+    const slug = idd;
     const {image} = router.query;
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");

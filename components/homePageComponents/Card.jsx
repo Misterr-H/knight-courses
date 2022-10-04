@@ -43,7 +43,7 @@ const Card = ({ title, lecture, description, rating, platform, price, id, isLogg
                     <Image className={'w-full rounded-xl'} src={image ? image : logo} alt={title} height={'70'} width={'50'} />
                 </div>
                 <div className="ml-4 w-5/6">
-                    <Link href={`/course/${id}?image=${image}`}><h3 className={'text-2xl font-bold hover:underline cursor-pointer'}>{title}</h3></Link>
+                    <Link href={`/course/?idd=${id}&image=${image}`}><h3 className={'text-2xl font-bold hover:underline cursor-pointer'}>{title}</h3></Link>
                     <div className={'flex '}>
                         <Rating
                             name="rate1"
