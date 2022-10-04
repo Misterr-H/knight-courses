@@ -22,7 +22,7 @@ const CoursePage = () => {
     const [platform, setPlatform] = useState("");
     const [language, setLanguage] = useState("");
     const [certificate, setCertificate] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [rating, setRating] = useState(5);
     // const [link, setLink] = useState("");
     const [desc, setDesc] = useState("");
@@ -58,7 +58,7 @@ const CoursePage = () => {
             setEnrolled(data.enrolls.length > 0 && data.enrolls.includes(GetUsername()));
         }
         fetchData();
-    })
+    }, [slug]);
 
 
     return (
@@ -114,10 +114,6 @@ const CoursePage = () => {
 
                  {/*This is for Smaller Screens*/}
                 <div className={'flex md:hidden flex-col'}>
-
-                    
-                    
-
                         <TitleCardMobile
                         title={title}
                         platform={platform}

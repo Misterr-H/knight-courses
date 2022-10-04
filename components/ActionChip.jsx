@@ -10,7 +10,7 @@ import {Rating} from "@mui/material";
 import {ButtonLoading} from "./LoadingComponents";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import {router} from "next/client";
+import {router} from "next/router";
 import axios from "axios";
 import {headers} from "../util/Auth";
 

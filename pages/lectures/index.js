@@ -12,7 +12,7 @@ const Lectures = () => {
     useEffect(() => {
         async function fetchData() {
             await axios.post('/api/courses/lectures', {
-                "id": id
+                "_id": id
             })
                 .then(res => {
                     setLectures(res.data);
