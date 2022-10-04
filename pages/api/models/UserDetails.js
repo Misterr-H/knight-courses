@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Schema for storing user info.
 
 const userSchema = new Schema({
 

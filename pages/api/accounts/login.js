@@ -10,7 +10,8 @@ const jwt = require('jsonwebtoken');
 
 import User from "./../models/UserDetails.js"
 
-// const User = require("./../models/UserDetails");
+
+// Endpoint for loging in user and providing jsonwebtoken.
 
 export default async function handler(req, res) {
 
@@ -30,6 +31,8 @@ export default async function handler(req, res) {
 
   try{
 
+    // if user exists then check the password, if password matches the provide the token in response.
+    
     user = await User.findOne({username: username});
 
     if (user && user.password === password){
