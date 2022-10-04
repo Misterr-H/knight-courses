@@ -8,6 +8,8 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Course schema
+
 const enrolledUserSchema = new Schema({
 
   user: {
@@ -27,10 +29,12 @@ const lecturesSchema = new Schema({
 
 });
 
+// For tracking user progress.
+
 const markAsComplete = new Schema({
 
 	user: {type: String,},
-	lecture: {type: Schema.Types.ObjectId}
+	lecture: {type: String}
 
 })
 

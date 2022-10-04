@@ -3,7 +3,7 @@
 
 import connection from './../models/connection'
 
-import {Course} from "./../models/courses"
+import {Course, Status} from "./../models/courses"
 
 const dotenv = require('dotenv');
 
@@ -35,12 +35,27 @@ export default async function handler(req, res) {
 
       let userdata = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-      console.log(userdata);
+      
+      let courseLectures = newCourse.lectures;
 
-      // adding the user in course's enrolls column. Enrolls column support array of strings.
-      newCourse.enrolls.push(userdata);
+      let lecturesDone;
 
-      res.status(201).json({message: "Enrolled"});
+      courseLectures.forEach(ele => {
+
+        const done = await Status.findOne({lecture: ele.lecture_title});
+
+
+        if (done){
+
+          lecturesDone += 1;
+
+        }
+
+
+
+      })
+
+      res.status(200).json({lecturesDone: lecturesDone});
 
 
     }
@@ -49,6 +64,7 @@ export default async function handler(req, res) {
     else{
 
       res.status(404).json({message: "Course didn't exists."})
+
     }
 
   }
@@ -56,6 +72,7 @@ export default async function handler(req, res) {
   catch(err){
 
     res.status(401).json(err)
+    
   }
 
 

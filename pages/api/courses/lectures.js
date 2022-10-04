@@ -5,6 +5,8 @@ import connection from './../models/connection'
 
 import {Course} from "./../models/courses"
 
+// Endpoint for listing all lectures of a course.
+
 export default async function handler(req, res) {
 
   console.log("Connecting to mongo");

@@ -3,13 +3,15 @@
 
 import connection from './../models/connection'
 
-import {Course} from "./../models/courses"
+import {Course, Status} from "./../models/courses"
 
 const dotenv = require('dotenv');
 
 const jwt = require('jsonwebtoken');
 
-// Endpoint for enrolling a user in courses.
+
+
+// Endpoint for tracking status i.e. whether the course is completed/uncompleted by the user.
 
 export default async function handler(req, res) {
 
@@ -19,15 +21,7 @@ export default async function handler(req, res) {
 
   console.log("Connecting to mongo");
 
-  console.log(req.body);
-
-
   try{
-
-    const newCourse = await Course.findOne(req.body)
-
-    if (newCourse){
-
 
       const authHeader = req.headers.authorization;
 
@@ -37,19 +31,36 @@ export default async function handler(req, res) {
 
       console.log(userdata);
 
-      // adding the user in course's enrolls column. Enrolls column support array of strings.
-      newCourse.enrolls.push(userdata);
+      const status = await Status.findOne(req.body);
 
-      res.status(201).json({message: "Enrolled"});
+      if (status){
+
+        res.status(200).json({message: "Already Completed!"})
+      }
+
+      else{
+
+        const newStatus = Status(req.body);
+
+        newStatus.save((err) => {
+
+          if (err){
+
+            res.status(404).json({message: "Status didn't update."});
+
+          }
+
+          else{
+
+            res.status(201).json({message: "User updated!"});
+
+          }
+
+        })
 
 
-    }
-
-
-    else{
-
-      res.status(404).json({message: "Course didn't exists."})
-    }
+        res.status(200).json({message: "Done!"})
+      }
 
   }
 

@@ -5,6 +5,8 @@ import connection from './../models/connection'
 
 import User from "./../models/UserDetails"
 
+// Endpoint for registering new user.
+
 export default async function handler(req, res) {
 
   console.log("Connecting to mongo");
