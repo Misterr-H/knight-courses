@@ -51,7 +51,7 @@ const courseSchema = new Schema({
 	certificate: Boolean,
 
 	lectures: [lecturesSchema],
-	enrolls: [{type: String}],
+	enrolls: [{type: String, unique: true}],
 
 }, { timestamps: true });
 
