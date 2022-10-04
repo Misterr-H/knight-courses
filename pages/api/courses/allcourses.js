@@ -4,7 +4,7 @@
 
 import connection from './../models/connection'
 
-import {Course} from "./../models/courses"
+import {Course} from "../models/courses"
 
 export default async function handler(req, res) {
 

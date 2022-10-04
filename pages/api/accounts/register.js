@@ -19,13 +19,19 @@ export default async function handler(req, res) {
 
     if (err){
 
-      res.status(404).json({message: "User didn't created."});
+      res.status(404).json({
+        status: 0,
+        message: "User didn't created."
+      });
 
     }
 
     else{
 
-      res.status(201).json({message: "User created!"});
+      res.status(201).json({
+        status: 1,
+        message: "User created!"
+      });
 
     }
 
