@@ -12,14 +12,14 @@ import {GotoClass} from "../ActionChip";
 import Link from "next/link";
 import logo from '../../public/logos/logo-h.png';
 
-export const InfoCard = ({className, image, platform, price, language, certificate, link}) => {
+export const InfoCard = ({className, image, platform, price, language, certificate, link, enrolled, id}) => {
     return (
         <div className={'flex py-5 flex-col bg-white border-1 border-neutral-200 rounded-md px-8 ' + className}>
             <Image src={image ? image : logo} width={40} height={200} alt={'Course Image'}/>
             {/*<Link href={link}>*/}
             {/*    <a><GotoClass/></a>*/}
             {/*</Link>*/}
-            <a><GotoClass/></a>
+            <a><GotoClass enrolled={enrolled} id={id}/></a>
 
             <div className={'mx-4 mt-5'}>
                 <div className={'border-b-1 flex py-2'}>

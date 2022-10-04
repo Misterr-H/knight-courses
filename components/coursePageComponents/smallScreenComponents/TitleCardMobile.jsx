@@ -15,7 +15,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import logo from '../../../public/logos/logo-h.png';
 
 
-const TitleCardMobile = ({image, title, platform, rating, link, desc}) => {
+const TitleCardMobile = ({image, title, platform, rating, link, desc, enrolled, id}) => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -49,58 +49,58 @@ const TitleCardMobile = ({image, title, platform, rating, link, desc}) => {
                     {/*    <MarkCompleteChip isSmall={true} className={'ml-1'}/>*/}
                     {/*</div>*/}
 
-                    <ThemeProvider theme={theme}>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2" className={'ml-5'}>
-                                    Share This Course
-                                </Typography>
-                                <div className={'flex flex-col mt-4'}>
-                                    <div className={'flex py-4 border-1 items-center border-black cursor-pointer'} onClick={() => {
-                                        window.open(`whatsapp://send?text=Hey, I found this amazing course on cosb. You can check out more details here.
-                                        ${window.location.href}`, '_blank')
-                                    }}>
-                                        <div className={'mx-4'}>
-                                            <WhatsAppIcon fontSize={'large'}/>
-                                        </div>
-                                        <span className={'ml-8'}>WhatsApp</span>
-                                    </div>
-                                    <div className={'flex py-4 items-center border-1 border-black cursor-pointer'} onClick={() => {
-                                        window.open(`https://www.facebook.com/sharer/sharer.php?u=Hey, I found this amazing course on cosb. You can check out more details here.
-                                        ${window.location.href}`, '_blank')
-                                    }}>
-                                        <div className={'mx-4'}>
-                                            <FacebookIcon fontSize={'large'}/>
-                                        </div>
-                                        <span className={'ml-8'}>Facebook</span>
-                                    </div>
-                                    <div className={'flex py-4 items-center border-1 border-black cursor-pointer'} onClick={() => {
-                                        window.open(`https://twitter.com/intent/tweet?url=Hey, I found this amazing course on cosb. You can check out more details here.
-                                        ${window.location.href}`, '_blank')
-                                    }}>
-                                        <div className={'mx-4'}>
-                                            <TwitterIcon fontSize={'large'}/>
-                                        </div>
-                                        <span className={'ml-8'}>Twitter</span>
-                                    </div>
-                                    <div className={'flex py-4 items-center border-1 border-black cursor-pointer'} onClick={() => {
-                                        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=Hey, I found this amazing course on cosb. You can check out more details here.
-                                        ${window.location.href}`, '_blank')
-                                    }}>
-                                        <div className={'mx-4'}>
-                                            <LinkedInIcon fontSize={'large'}/>
-                                        </div>
-                                        <span className={'ml-8'}>LinkedIn</span>
-                                    </div>
-                                </div>
-                            </Box>
-                        </Modal>
-                    </ThemeProvider>
+                    {/*<ThemeProvider theme={theme}>*/}
+                    {/*    <Modal*/}
+                    {/*        open={open}*/}
+                    {/*        onClose={handleClose}*/}
+                    {/*        aria-labelledby="modal-modal-title"*/}
+                    {/*        aria-describedby="modal-modal-description"*/}
+                    {/*    >*/}
+                            {/*<Box sx={style}>*/}
+                            {/*    <Typography id="modal-modal-title" variant="h6" component="h2" className={'ml-5'}>*/}
+                            {/*        Share This Course*/}
+                            {/*    </Typography>*/}
+                            {/*    <div className={'flex flex-col mt-4'}>*/}
+                            {/*        <div className={'flex py-4 border-1 items-center border-black cursor-pointer'} onClick={() => {*/}
+                            {/*            window.open(`whatsapp://send?text=Hey, I found this amazing course on cosb. You can check out more details here.*/}
+                            {/*            ${window.location.href}`, '_blank')*/}
+                            {/*        }}>*/}
+                            {/*            <div className={'mx-4'}>*/}
+                            {/*                <WhatsAppIcon fontSize={'large'}/>*/}
+                            {/*            </div>*/}
+                            {/*            <span className={'ml-8'}>WhatsApp</span>*/}
+                            {/*        </div>*/}
+                            {/*        <div className={'flex py-4 items-center border-1 border-black cursor-pointer'} onClick={() => {*/}
+                            {/*            window.open(`https://www.facebook.com/sharer/sharer.php?u=Hey, I found this amazing course on cosb. You can check out more details here.*/}
+                            {/*            ${window.location.href}`, '_blank')*/}
+                            {/*        }}>*/}
+                            {/*            <div className={'mx-4'}>*/}
+                            {/*                <FacebookIcon fontSize={'large'}/>*/}
+                            {/*            </div>*/}
+                            {/*            <span className={'ml-8'}>Facebook</span>*/}
+                            {/*        </div>*/}
+                            {/*        <div className={'flex py-4 items-center border-1 border-black cursor-pointer'} onClick={() => {*/}
+                            {/*            window.open(`https://twitter.com/intent/tweet?url=Hey, I found this amazing course on cosb. You can check out more details here.*/}
+                            {/*            ${window.location.href}`, '_blank')*/}
+                            {/*        }}>*/}
+                            {/*            <div className={'mx-4'}>*/}
+                            {/*                <TwitterIcon fontSize={'large'}/>*/}
+                            {/*            </div>*/}
+                            {/*            <span className={'ml-8'}>Twitter</span>*/}
+                            {/*        </div>*/}
+                            {/*        <div className={'flex py-4 items-center border-1 border-black cursor-pointer'} onClick={() => {*/}
+                            {/*            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=Hey, I found this amazing course on cosb. You can check out more details here.*/}
+                            {/*            ${window.location.href}`, '_blank')*/}
+                            {/*        }}>*/}
+                            {/*            <div className={'mx-4'}>*/}
+                            {/*                <LinkedInIcon fontSize={'large'}/>*/}
+                            {/*            </div>*/}
+                            {/*            <span className={'ml-8'}>LinkedIn</span>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</Box>*/}
+                        {/*</Modal>*/}
+                    {/*</ThemeProvider>*/}
 
                 </div>
 
@@ -124,7 +124,7 @@ const TitleCardMobile = ({image, title, platform, rating, link, desc}) => {
                 {/*<Link href={link}>*/}
                 {/*    <a><GotoClass/></a>*/}
                 {/*</Link>*/}
-                <a><GotoClass/></a>
+                <a><GotoClass enrolled={enrolled} id={id} /></a>
                 {/*<WriteReviewChip className={'mx-4 py-3 mt-2'}/>*/}
             </div>
         </div>

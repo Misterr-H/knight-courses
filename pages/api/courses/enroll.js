@@ -31,7 +31,11 @@ export default async function handler(req, res) {
 
       const authHeader = req.headers.authorization;
 
+      console.log(req.headers);
+
       const token = (authHeader && authHeader.split(" ")[1]) || req.query.token;
+
+      console.log(token);
 
       let userdata = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
@@ -40,7 +44,11 @@ export default async function handler(req, res) {
       // adding the user in course's enrolls column. Enrolls column support array of strings.
       newCourse.enrolls.push(userdata);
 
-      res.status(201).json({message: "Enrolled"});
+      console.log(newCourse);
+
+      await newCourse.save().then(res => console.log(res));
+
+      res.status(200).json({message: "Enrolled"});
 
 
     }

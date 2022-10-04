@@ -10,6 +10,9 @@ import {useState, useEffect} from "react";
 import Box from "@mui/material/Box";
 import {CircularProgress} from "@mui/material";
 import {NextSeo} from "next-seo";
+import {GetUsername} from "../../util/Auth";
+
+
 
 export default function CoursePage({course}) {
     const router = useRouter();
@@ -21,10 +24,11 @@ export default function CoursePage({course}) {
     const [language, setLanguage] = useState("");
     const [certificate, setCertificate] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(5);
     const [link, setLink] = useState("");
     const [desc, setDesc] = useState("");
     const [id, setId] = useState("");
+    const [enrolled, setEnrolled] = useState(false);
 
 
     useEffect(() => {
@@ -40,16 +44,19 @@ export default function CoursePage({course}) {
                 })
             });
             const data = await res.json();
+            console.log(data);
+            setId(data._id);
             setTitle(data.title);
             setPrice(data.price);
             setPlatform(data.author);
             setLanguage(data.language);
             setCertificate(data.certificate);
-            setRating(data.rating);
+            // setRating(data.rating);
             setLink(data.link);
             setDesc(data.description);
-            setId(data.id);
+            setId(data._id);
             setLoading(false);
+            setEnrolled(data.enrolls.length > 0 && data.enrolls.includes(GetUsername()));
         }
         fetchData();
     }, [])
@@ -99,6 +106,8 @@ export default function CoursePage({course}) {
                         price={price === '0' ? 'Free' : price}
                         language={language}
                         certificate={certificate ? 'Certificate Available' : 'Certificate Available'}
+                        enrolled={enrolled}
+                        id={id}
                        // link={link}
                     />
                 </div>
@@ -115,8 +124,10 @@ export default function CoursePage({course}) {
                         platform={platform}
                         rating={rating}
                         image={image}
-                        link={link}
+                        // link={link}
                         desc = {desc}
+                        enrolled={enrolled}
+                        id={id}
                     />
                     {/*<NavigationCard/>*/}
                     <InfoCardMobile

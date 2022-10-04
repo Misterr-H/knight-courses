@@ -10,6 +10,9 @@ import {Rating} from "@mui/material";
 import {ButtonLoading} from "./LoadingComponents";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import {router} from "next/client";
+import axios from "axios";
+import {headers} from "../util/Auth";
 
 
 export const AddToListChip = ({className, isSmall}) => {
@@ -171,10 +174,29 @@ export const WriteReviewChip = ({className}) => {
     )
 }
 
-export const GotoClass = ({className, link}) => {
+export const GotoClass = ({className, link, enrolled, id}) => {
+    const [loading, setLoading] = useState(false);
+
     return (
-        <div className={'flex justify-center text-white bg-gray-800 hover:bg-black duration-300 mt-5 py-2 rounded-lg mx-4 cursor-pointer ' + className}>
-            <span className={'text-lg'}>Enroll</span>
+        <div onClick={() => {
+            setLoading(true);
+            if(enrolled) {
+                router.push('/lectures/?id=' + id);
+            }
+            else {
+                axios.post('/api/courses/enroll', {
+                    id: id
+                }, {
+                    headers: headers()
+                })
+                    .then((res) => {
+                        if(res.data.message) {
+                            router.push('/lectures/?id=' + id);
+                        }
+                    })
+            }
+        }} className={'flex justify-center text-white bg-gray-800 hover:bg-black duration-300 mt-5 py-2 rounded-lg mx-4 cursor-pointer ' + className}>
+            <span className={'text-lg'}>{loading ? <ButtonLoading/> : enrolled ? 'Go to class' : 'Enroll'}</span>
             <KeyboardDoubleArrowRightOutlinedIcon
                 className={'my-auto'}
             />

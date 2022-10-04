@@ -11,7 +11,9 @@ const Home = () => {
     const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
+
         async function fetchData() {
+            console.log("fetching data");
             await axios.get("/api/courses/allcourses")
                 .then(res => {
                     setCourseData(res.data);
@@ -21,6 +23,9 @@ const Home = () => {
         }
         fetchData();
         setIsLogged(IsLoggedIn());
+        if(!IsLoggedIn()) {
+            window.location.href = "/login";
+        }
     }, []);
 
 

@@ -36,3 +36,10 @@ export const GetUsername = () => {
         return localStorage.getItem('username');
     }
 }
+
+export const headers = () => {
+    return {
+            'Authorization': `Bearer ${GetToken()}`,
+            'Content-Type': 'application/json'
+        }
+}

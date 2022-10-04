@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       let lecturesDone;
 
       // checking if the user has done this lecture or not.
-      courseLectures.forEach(ele => {
+      courseLectures.forEach(async ele => {
 
         const done = await Status.findOne({lecture: ele.lecture_title});
 

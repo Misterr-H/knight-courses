@@ -114,12 +114,12 @@ const Card = ({ title, lecture, description, rating, platform, price, id, isLogg
                 />
                 <span className={'ml-1 text-sm text-gray-600'}>{price === 0 ? 'Free Course' : price}</span>
             </div>
-            {isLogged && <div className='p-2 flex'>
-                <button className={'bg-black text-white py-2 px-4 rounded-lg hover:scale-105 duration-200'}>
-                    Enroll Now
-                </button>
+            {/*{isLogged && <div className='p-2 flex'>*/}
+            {/*    <button className={'bg-black text-white py-2 px-4 rounded-lg hover:scale-105 duration-200'}>*/}
+            {/*        Enroll Now*/}
+            {/*    </button>*/}
 
-            </div>}
+            {/*</div>}*/}
         </div>
 
     </motion.div>
