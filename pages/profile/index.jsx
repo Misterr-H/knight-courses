@@ -1,9 +1,4 @@
 import {useRouter} from "next/router";
-import Navbar from "../../components/Navbar";
-import Image from "next/image";
-import {EditProfileChip} from "../../components/ActionChip";
-import SettingsIcon from '@mui/icons-material/Settings';
-import {motion} from "framer-motion";
 import ProfileCard from "../../components/profilePageComponents/ProfileCard";
 import {useEffect, useState} from "react";
 
