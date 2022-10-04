@@ -3,24 +3,24 @@ import Action from "../components/homePageComponents/Action";
 import Card from "../components/homePageComponents/Card";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {IsLoggedIn} from "../util/Auth";
 
 const Home = () => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [image, setImage] = useState("");
-    const [url, setUrl] = useState("");
+    const [courseData, setCourseData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
-            await axios.get("https://jsonlink.io/api/extract?url=https://youtube.com/playlist?list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL")
+            await axios.get("/api/courses/allcourses")
                 .then(res => {
-                    setTitle(res.data.title);
-                    setDescription(res.data.description);
-                    setImage(res.data.images[0]);
-                    setUrl(res.data.url);
+                    setCourseData(res.data);
+                    setLoading(false);
+                    console.log(res.data);
                 })
         }
         fetchData();
+        setIsLogged(IsLoggedIn());
     }, []);
 
 
@@ -30,7 +30,16 @@ const Home = () => {
             <title>Knight Courses</title>
         </Head>
           <Action/>
-          <Card title={title} image={image} description={description} />
+          <div className={'flex flex-col mt-20'}>
+
+
+          {
+                loading ? <div className="mx-auto text-2xl">Loading...</div> :
+                courseData.map((course, index) => {
+                    return <Card key={index} isLogged={isLogged} lecture={course.lectures[0].lecture_link} title={course.title} description={course.description} duration={course.duration} price={course.price} id={course._id} platform={course.author} language={course.language} />
+                })
+          }
+          </div>
       </>
   )
 }

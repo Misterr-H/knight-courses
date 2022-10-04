@@ -16,9 +16,10 @@ export const InfoCard = ({className, image, platform, price, language, certifica
     return (
         <div className={'flex py-5 flex-col bg-white border-1 border-neutral-200 rounded-md px-8 ' + className}>
             <Image src={image ? image : logo} width={40} height={200} alt={'Course Image'}/>
-            <Link href={link}>
-                <a><GotoClass/></a>
-            </Link>
+            {/*<Link href={link}>*/}
+            {/*    <a><GotoClass/></a>*/}
+            {/*</Link>*/}
+            <a><GotoClass/></a>
 
             <div className={'mx-4 mt-5'}>
                 <div className={'border-b-1 flex py-2'}>

@@ -174,7 +174,7 @@ export const WriteReviewChip = ({className}) => {
 export const GotoClass = ({className, link}) => {
     return (
         <div className={'flex justify-center text-white bg-gray-800 hover:bg-black duration-300 mt-5 py-2 rounded-lg mx-4 cursor-pointer ' + className}>
-            <span className={'text-lg'}>Go to class</span>
+            <span className={'text-lg'}>Enroll</span>
             <KeyboardDoubleArrowRightOutlinedIcon
                 className={'my-auto'}
             />

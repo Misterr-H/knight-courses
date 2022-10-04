@@ -3,18 +3,32 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import Image from 'next/image'
-import {Rating, Snackbar} from "@mui/material";
+import {Button, Rating, Snackbar} from "@mui/material";
 import logo from '../../public/logos/logo-v.png'
 import Link from "next/link";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import SpeedIcon from '@mui/icons-material/Speed';
+import TranslateIcon from '@mui/icons-material/Translate';
+import axios from "axios";
 
-const Card = ({ title, description, image, rating, platform, price, id, isLogged }) => {
+const Card = ({ title, lecture, description, rating, platform, price, id, isLogged, duration, language }) => {
     const [status, setStatus] = useState('');
     const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+    const [image, setImage] = useState('');
+
+    useEffect(() => {
+        async function getImage() {
+            axios.get(`https://jsonlink.io/api/extract?url=${lecture}`)
+                .then(res => {
+                    setImage(res.data.images[0]);
+                })
+        }
+        getImage();
+    }, [])
 
 
     const handleChange = async (event) => {
@@ -29,13 +43,13 @@ const Card = ({ title, description, image, rating, platform, price, id, isLogged
                     <Image className={'w-full rounded-xl'} src={image ? image : logo} alt={title} height={'70'} width={'50'} />
                 </div>
                 <div className="ml-4 w-5/6">
-                    <Link href={`/course/${id}`}><h3 className={'text-2xl font-bold hover:underline cursor-pointer'}>{title}</h3></Link>
+                    <Link href={`/course/${id}?image=${image}`}><h3 className={'text-2xl font-bold hover:underline cursor-pointer'}>{title}</h3></Link>
                     <div className={'flex '}>
                         <Rating
                             name="rate1"
                             starCount={rating}
                             precision={0.1}
-                            value={rating}
+                            value={5}
                             readOnly={true}
                         />
                         <span className={'ml-2 text-gray-600 text-xs my-auto'}>Best Online Course</span>
@@ -64,24 +78,33 @@ const Card = ({ title, description, image, rating, platform, price, id, isLogged
                 />
                 <span className={'ml-1 text-sm text-gray-600'}>{platform}</span>
             </div>
-            {/*<div className={'border-b-1 p-2 flex'}>
+            <div className={'border-b-1 p-2 flex'}>
                 <SpeedIcon
                     fontSize={'small'}
                     sx={{
                         color: 'gray',
                     }}
                 />
-                <span className={'ml-1 text-sm text-gray-600'}>{'30 hours long'}</span>
-            </div>*/}
+                <span className={'ml-1 text-sm text-gray-600'}>{duration}</span>
+            </div>
             <div className={'border-b-1 p-2 flex'}>
-                <CalendarTodayOutlinedIcon
+                <TranslateIcon
                     fontSize={'small'}
                     sx={{
                         color: 'gray',
                     }}
                 />
-                <span className={'ml-1 text-sm text-gray-600'}>{'Self Paced'}</span>
+                <span className={'ml-1 text-sm text-gray-600'}>{language}</span>
             </div>
+            {/*<div className={'border-b-1 p-2 flex'}>*/}
+            {/*    <CalendarTodayOutlinedIcon*/}
+            {/*        fontSize={'small'}*/}
+            {/*        sx={{*/}
+            {/*            color: 'gray',*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*    <span className={'ml-1 text-sm text-gray-600'}>{'Self Paced'}</span>*/}
+            {/*</div>*/}
             <div className={`${isLogged ? 'border-b-1' : ''} p-2 flex`}>
                 <CurrencyRupeeIcon
                     fontSize={'small'}
@@ -92,31 +115,9 @@ const Card = ({ title, description, image, rating, platform, price, id, isLogged
                 <span className={'ml-1 text-sm text-gray-600'}>{price === 0 ? 'Free Course' : price}</span>
             </div>
             {isLogged && <div className='p-2 flex'>
-                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                    <InputLabel id="demo-select-small">Status</InputLabel>
-                    <Select
-                        disableUnderline
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        value={status}
-                        label="Age"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={'Doing'}>Doing</MenuItem>
-                        <MenuItem value={'Done'}>Done</MenuItem>
-                        <MenuItem value={'Bought'}>Bought</MenuItem>
-                    </Select>
-                </FormControl>
-                <Snackbar
-                    open={isSnackbarOpen}
-                    autoHideDuration={6000}
-                    onClose={() => setIsSnackbarOpen(false)}
-                    message={'Status Updated Successfully'}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                />
+                <button className={'bg-black text-white py-2 px-4 rounded-lg hover:scale-105 duration-200'}>
+                    Enroll Now
+                </button>
 
             </div>}
         </div>

@@ -121,10 +121,11 @@ const TitleCardMobile = ({image, title, platform, rating, link, desc}) => {
                 </div>
                 <span className={'mt-5 text-justify'}>{desc}</span>
 
-                <Link href={link}>
-                    <a><GotoClass/></a>
-                </Link>
-                <WriteReviewChip className={'mx-4 py-3 mt-2'}/>
+                {/*<Link href={link}>*/}
+                {/*    <a><GotoClass/></a>*/}
+                {/*</Link>*/}
+                <a><GotoClass/></a>
+                {/*<WriteReviewChip className={'mx-4 py-3 mt-2'}/>*/}
             </div>
         </div>
     )

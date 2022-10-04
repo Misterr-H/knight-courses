@@ -54,7 +54,7 @@ const Navbar = ()   => {
                                 }}>My Dashboard</MenuItem>
                                 <MenuItem onClick={() => {
                                     Logout();
-                                    router.push('/');
+                                    window.location.reload();
                                 }}>Logout</MenuItem>
                             </Menu>
                         </>

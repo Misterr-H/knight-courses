@@ -14,18 +14,45 @@ import {NextSeo} from "next-seo";
 export default function CoursePage({course}) {
     const router = useRouter();
     const { slug } = router.query;
+    const {image} = router.query;
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [platform, setPlatform] = useState("");
     const [language, setLanguage] = useState("");
     const [certificate, setCertificate] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [image, setImage] = useState("");
     const [rating, setRating] = useState(0);
     const [link, setLink] = useState("");
     const [desc, setDesc] = useState("");
     const [id, setId] = useState("");
 
+
+    useEffect(() => {
+        async function fetchData() {
+            setLoading(true);
+            const res = await fetch(`/api/courses/getcoursedetails`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: slug,
+                })
+            });
+            const data = await res.json();
+            setTitle(data.title);
+            setPrice(data.price);
+            setPlatform(data.author);
+            setLanguage(data.language);
+            setCertificate(data.certificate);
+            setRating(data.rating);
+            setLink(data.link);
+            setDesc(data.description);
+            setId(data.id);
+            setLoading(false);
+        }
+        fetchData();
+    }, [])
 
 
     return (
@@ -72,7 +99,7 @@ export default function CoursePage({course}) {
                         price={price === '0' ? 'Free' : price}
                         language={language}
                         certificate={certificate ? 'Certificate Available' : 'Certificate Available'}
-                        link={link}
+                       // link={link}
                     />
                 </div>
 
@@ -99,7 +126,7 @@ export default function CoursePage({course}) {
                         certificate={certificate ? 'Certificate Available' : 'Certificate Available'}
                     />
                     {/*<RelatedCoursesMobile/>*/}
-                    <ReviewsMobile id={slug}/>
+                    {/*<ReviewsMobile id={slug}/>*/}
                     {/*<BottomButton/>*/}
                 </div>
 
