@@ -38,7 +38,18 @@ export default async function handler(req, res) {
       console.log(userdata);
 
       // adding the user in course's enrolls column. Enrolls column support array of strings.
-      newCourse.enrolls.push(userdata);
+
+      try{
+
+        newCourse.enrolls.push(userdata);
+
+      }
+
+      catch(err){
+
+        res.status(401).json({message: err});
+        
+      }
 
       res.status(201).json({message: "Enrolled"});
 
