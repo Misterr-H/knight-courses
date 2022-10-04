@@ -14,6 +14,7 @@ export default async function handler(req, res) {
   console.log("Connecting to mongo");
 
   console.log(req.body);
+  
   const newCourse = Course(req.body)
 
   newCourse.save((err) => {
