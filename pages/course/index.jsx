@@ -5,16 +5,14 @@ import {InfoCard} from "../../components/coursePageComponents/InfoCard";
 import TitleCardMobile
     from "../../components/coursePageComponents/smallScreenComponents/TitleCardMobile";
 import InfoCardMobile from "../../components/coursePageComponents/smallScreenComponents/InfoCardMobile";
-import ReviewsMobile from "../../components/coursePageComponents/smallScreenComponents/ReviewsMobile";
 import {useState, useEffect} from "react";
 import Box from "@mui/material/Box";
 import {CircularProgress} from "@mui/material";
-import {NextSeo} from "next-seo";
 import {GetUsername} from "../../util/Auth";
 
 
 
-export default function CoursePage({course}) {
+const CoursePage = () => {
     const router = useRouter();
     const { idd } = router.query;
     const slug = idd;
@@ -26,7 +24,7 @@ export default function CoursePage({course}) {
     const [certificate, setCertificate] = useState(false);
     const [loading, setLoading] = useState(false);
     const [rating, setRating] = useState(5);
-    const [link, setLink] = useState("");
+    // const [link, setLink] = useState("");
     const [desc, setDesc] = useState("");
     const [id, setId] = useState("");
     const [enrolled, setEnrolled] = useState(false);
@@ -53,14 +51,14 @@ export default function CoursePage({course}) {
             setLanguage(data.language);
             setCertificate(data.certificate);
             // setRating(data.rating);
-            setLink(data.link);
+            // setLink(data.link);
             setDesc(data.description);
             setId(data._id);
             setLoading(false);
             setEnrolled(data.enrolls.length > 0 && data.enrolls.includes(GetUsername()));
         }
         fetchData();
-    }, [])
+    })
 
 
     return (
@@ -147,3 +145,5 @@ export default function CoursePage({course}) {
     )}
         </>)
 }
+
+export default CoursePage;
